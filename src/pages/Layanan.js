@@ -9,7 +9,9 @@ const Layanan = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "layanan"), orderBy("judul"));
+    // --- PERBAIKAN DI SINI ---
+    // Mengurutkan berdasarkan field 'urutan' yang diatur oleh admin
+    const q = query(collection(db, "layanan"), orderBy("urutan", "asc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setLayanan(data);
@@ -29,7 +31,7 @@ const Layanan = () => {
     return embedLink;
   };
 
-  // --- Styles Diperbarui ---
+  // --- Styles ---
   const pageStyle = {
     padding: "40px 20px",
     maxWidth: "800px",
@@ -40,7 +42,7 @@ const Layanan = () => {
     fontWeight: "bold",
     marginBottom: "30px",
     textAlign: "center",
-    color: "#00092f", // Warna baru
+    color: "#00092f",
   };
   const accordionContainerStyle = {
     display: "flex",
@@ -48,7 +50,7 @@ const Layanan = () => {
     gap: "16px",
   };
   const itemStyle = {
-    border: "1px solid #ddd", // Border lebih soft
+    border: "1px solid #ddd",
     borderRadius: "12px",
     boxShadow: "0 4px 8px rgba(0,0,0,0.05)",
     overflow: "hidden",
@@ -58,7 +60,7 @@ const Layanan = () => {
     width: "100%",
     textAlign: "left",
     padding: "16px 20px",
-    backgroundColor: "#00092f", // Warna baru
+    backgroundColor: "#00092f",
     color: "white",
     fontWeight: "600",
     border: "none",
@@ -79,7 +81,7 @@ const Layanan = () => {
     border: "1px solid #ccc",
   };
   const linkBukaStyle = {
-      color: '#00092f', // Warna baru
+      color: '#00092f',
       fontWeight: 'bold',
       textDecoration: 'underline'
   };
